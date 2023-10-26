@@ -1,5 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 using ETHTPS.Configuration;
+using ETHTPS.Control.Commands.Help.System.Check.Executables;
 using ETHTPS.Control.Commands.System.Check;
 using Spectre.Console;
 using Spectre.Console.Cli;
@@ -11,15 +12,14 @@ namespace ETHTPS.Control.Commands.System.Check
 		public override int Execute([NotNull] CommandContext context, [NotNull] SysCheckSettings settings)
 		{
 			var config = AppConfig.FromJSON();
-			var dependencies = config.Dependencies;
-			if (dependencies == null)
+			if (config.Dependencies == null)
 			{
-				AnsiConsole.MarkupLine("[red]No dependencies found in configuration file.[/]");
+				AnsiConsole.MarkupLine("[red]No config.Dependencies found in configuration file.[/]");
 				return 1;
 			}
 			if (settings.Prompt)
 			{
-				var fruits = AnsiConsole.Prompt(
+				var manualSelection = AnsiConsole.Prompt(
 		new MultiSelectionPrompt<string>()
 				.Title("Which components should be checked?")
 				.PageSize(15)
@@ -27,35 +27,11 @@ namespace ETHTPS.Control.Commands.System.Check
 				.InstructionsText(
 						"Press [blue]<space>[/] to (un)select a component, " +
 						"[green]<enter>[/] to start)")
-				.AddChoices(dependencies.Select(d => d.Name).ToArray()));
+				.AddChoices(config.Dependencies?.Select(d => d.Name).ToArray() ?? []));
 
-				dependencies = dependencies.Where(d => fruits.Contains(d.Name)).ToArray();
+				config.Dependencies = config.Dependencies?.Where(d => manualSelection.Contains(d.Name)).ToArray();
 			}
-			var directoriesToCheck = config.DefaultInstallationDirectories?.ToList().Concat(Environment.GetEnvironmentVariable("PATH")?.Split(';') ?? []).Distinct().ToList();
-			if (directoriesToCheck == null)
-			{
-				AnsiConsole.MarkupLine("[red]No default installation directories found either in the configuration file or the $PATH variable.[/]");
-				return 1;
-			}
-			var rows = new List<Text>();
-			foreach (var app in dependencies)
-			{
-				var allDirs = directoriesToCheck.Concat(app.ExtraDefaultDirectories ?? []).ToList();
-				if (!allDirs.Any(dir => File.Exists(Path.Combine(dir, app.Name)) || File.Exists(Path.Combine(dir, app.Name + ".exe"))))
-				{
-					if (app.Mandatory)
-					{
-						rows.Add(new Text(app.Name, new Style(foreground: Color.Red)));
-					}
-					else
-					{
-						rows.Add(new Text(app.Name, new Style(foreground: Color.Yellow)));
-					}
-					continue;
-				}
-				rows.Add(new Text(app.Name, new Style(foreground: Color.Green)));
-			}
-			AnsiConsole.Write(new Rows(rows));
+			config.RunDependencyCheck();
 			return 0;
 		}
 	}

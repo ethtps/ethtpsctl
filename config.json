@@ -2,14 +2,6 @@
   "DefaultInstallationDirectories":["/usr/local/bin/", "/usr/bin/", "/bin/", "/usr/local/sbin/", "/usr/sbin/", "/sbin/", "C:/Program Files/", "C:/Program Files (x86)/", "C:/Windows/System32/", "C:/Windows/"],
   "Dependencies":[
     {
-      "Name":"dotnet SDK",
-      "Mandatory":true,
-      "ExtraDefaultDirectories":[
-        "~/.dotnet/sdk/",
-				"$HOME/dotnet"
-      ]
-    },
-    {
       "Name":"git",
       "Description": "git client",
       "Mandatory":true
@@ -28,6 +20,15 @@
     },
     {
       "Name":"yarn",
+      "Mandatory":false
+    },
+		{
+      "Name":"azuredatastudio",
+      "Mandatory":false
+    },
+		{
+      "Name":"code",
+			"Description":"Visual Studio Code",
       "Mandatory":false
     }
   ]
