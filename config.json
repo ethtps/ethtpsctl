@@ -59,5 +59,12 @@
 	"BranchAliases":{
 		"main":["master", "prod", "production"],
 		"dev":["develop", "development"]
+	},
+	"ProjectAliases":{
+		"ethtps.backend":["backend", "api"],
+		"ethtps.frontend":["frontend", "web"],
+		"ethtps.utils":["utils", "common"],
+		"ethtps.admin.backend":["admin", "admin.backend"],
+		"ethtps.api.clients":["clients", "api.clients"]
 	}
 }

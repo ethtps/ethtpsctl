@@ -1,16 +1,12 @@
+using System;
 using System.ComponentModel;
 using Spectre.Console;
 using Spectre.Console.Cli;
 
-namespace ETHTPS.Control.Commands.System.Check
+namespace ETHTPS.Control.Commands
 {
-	public sealed class SysCheckSettings : CommandSettings
+	public abstract class ETHTPSCommandSettingsBase : CommandSettings
 	{
-		[CommandOption("-p|--prompt", IsHidden = false)]
-		[DefaultValue(false)]
-		[Description("Show a prompt displaying what exactly should be checked")]
-		public bool Prompt { get; set; }
-
 		[CommandOption("-b|--base-directory", IsHidden = false)]
 		[Description("The directory where ETHTPS code should reside")]
 		public required string ETHTPSBaseDirectory { get; set; }

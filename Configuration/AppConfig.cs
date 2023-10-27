@@ -19,5 +19,6 @@ namespace ETHTPS.Control.Configuration
 		public string[]? DefaultInstallationDirectories { get; set; }
 		public ProjectDependency[]? ProjectDependencies { get; set; }
 		public Dictionary<string, string[]> BranchAliases { get; set; } = new();
+		public Dictionary<string, string[]> ProjectAliases { get; set; } = new();
 	}
 }
