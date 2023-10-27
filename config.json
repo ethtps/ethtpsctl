@@ -43,7 +43,7 @@
 			"Name":"ethtps.frontend",
 			"Aliases":["frontend", "web"],
 			"RepositoryURL":"https://github.com/ethtps/ethtps.frontend",
-			"DefaultBranch":"dev"
+			"DefaultBranch":"dev",
 		},
 		{
 			"Name":"ethtps.utils",
@@ -64,5 +64,11 @@
 	"BranchAliases":{
 		"main":["master", "prod", "production"],
 		"dev":["develop", "development"]
-	}
+	},
+	"Editor":"code",
+	"System":{
+	"Endpoints":[
+		"https://ethtps.info",
+		"https://api.ethtps.info"
+	]}
 }

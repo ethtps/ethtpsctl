@@ -8,6 +8,11 @@ namespace ETHTPS.Control.Commands.DevEnv
 {
 	public class DevEnvSettings : ETHTPSCommandSettingsBase
 	{
+		[CommandOption("-h|--hook", IsHidden = false)]
+		[Description("Whether to hook the editor process")]
+		[DefaultValue(false)]
+		public required bool Hook { get; set; }
+
 		[CommandOption("-p|--projects", IsHidden = false)]
 		[DefaultValue(false)]
 		[Description("Which projects should be opened for editing")]
@@ -32,7 +37,7 @@ namespace ETHTPS.Control.Commands.DevEnv
 			{
 				return ValidationResult.Error("At least one project must be specified using the --project(s) parameter.");
 			}
-			var config = AppConfig.FromJSON();
+			var config = AppConfiguration.FromJSON();
 			Dictionary<string, string> reverseLookup = new();
 			foreach (var kvp in config.ProjectAliases)
 			{
@@ -41,13 +46,17 @@ namespace ETHTPS.Control.Commands.DevEnv
 					reverseLookup[value] = kvp.Key;
 				}
 			}
-			ProjectList = ProjectList.Select(p => reverseLookup.ContainsKey(p) ? reverseLookup[p] : p).ToList();
+			ProjectList = ProjectList.Select(p => reverseLookup.TryGetValue(p, out string? value) ? value : p).ToList();
 			foreach (var project in ProjectList)
 			{
 				if (!Directory.Exists(Path.Combine(ETHTPSBaseDirectory, project)))
 				{
 					return ValidationResult.Error($"The specified project ({project}) does not exist.");
 				}
+			}
+			if (string.IsNullOrWhiteSpace(config.Editor))
+			{
+				return ValidationResult.Error("No editor is configured. Please specify an editor in config.json.");
 			}
 			return ValidationResult.Success();
 		}

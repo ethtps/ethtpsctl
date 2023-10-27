@@ -9,5 +9,6 @@ namespace ETHTPS.Control.Configuration
 		public string[]? Aliases { get; set; }
 		public required string RepositoryURL { get; set; }
 		public string? DefaultBranch { get; set; }
+		public string? EntryPoint { get; set; }
 	}
 }

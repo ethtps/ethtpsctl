@@ -5,7 +5,7 @@ namespace ETHTPS.Control.Commands.Help.System.Check.Executables
 {
 	public static class ExecutableExtensions
 	{
-		public static bool RunExternalDependencyCheck(this AppConfig config)
+		public static bool RunExternalDependencyCheck(this AppConfiguration config)
 		{
 			var table = new Table();
 			table.Title = new TableTitle("External dependency check");
@@ -43,7 +43,7 @@ namespace ETHTPS.Control.Commands.Help.System.Check.Executables
 			return ok;
 		}
 
-		public static bool RunProjectDependencyCheck(this AppConfig config, string baseDirectory)
+		public static bool RunProjectDependencyCheck(this AppConfiguration config, string baseDirectory)
 		{
 			var table = new Table();
 			table.Title = new TableTitle("Project dependency check");

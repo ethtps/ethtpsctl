@@ -17,7 +17,7 @@ namespace ETHTPS.Control.Commands.System.Check
 				AnsiConsole.MarkupLine($"[red]{validationResult.Message}[/]");
 				return 1;
 			}
-			var config = AppConfig.FromJSON();
+			var config = AppConfiguration.FromJSON();
 			if (config.Dependencies == null)
 			{
 				AnsiConsole.MarkupLine("[red]No dependencies found in configuration file.[/]");

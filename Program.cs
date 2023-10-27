@@ -1,6 +1,7 @@
 ﻿using System;
 using ETHTPS.Control.Commands.DevEnv;
 using ETHTPS.Control.Commands.Help;
+using ETHTPS.Control.Commands.Status;
 using ETHTPS.Control.Commands.System.Check;
 using Spectre.Console;
 using Spectre.Console.Cli;
@@ -23,6 +24,10 @@ namespace ETHTPS.Control
 				.WithAlias("dev")
 				.WithDescription("Opens one or more ETHTPS subprojects for code editing.")
 				.WithExample(new[] { "devenv --projects=backend,frontend" });
+
+				config.AddCommand<StatusCommand>("status")
+				.WithDescription("Checks the status of all ETHTPS system components.")
+				.WithExample(new[] { "status" });
 			});
 			return app.Run(args);
 		}

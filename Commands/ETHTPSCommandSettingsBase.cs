@@ -11,6 +11,11 @@ namespace ETHTPS.Control.Commands
 		[Description("The directory where ETHTPS code should reside")]
 		public required string ETHTPSBaseDirectory { get; set; }
 
+		[CommandOption("-v|--verbose", IsHidden = false)]
+		[Description("Show verbose output")]
+		[DefaultValue(false)]
+		public bool Verbose { get; set; }
+
 		public override ValidationResult Validate()
 		{
 			if (string.IsNullOrWhiteSpace(ETHTPSBaseDirectory))
