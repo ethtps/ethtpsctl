@@ -10,7 +10,6 @@ namespace ETHTPS.Control.Commands.DevEnv
 	{
 		public override int Execute([NotNull] CommandContext context, [NotNull] DevEnvSettings settings)
 		{
-			AnsiConsole.WriteLine(string.Join(" & ", settings.ProjectList));
 			return 0;
 		}
 	}
