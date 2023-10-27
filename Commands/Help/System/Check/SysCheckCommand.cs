@@ -1,7 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
-using ETHTPS.Configuration;
 using ETHTPS.Control.Commands.Help.System.Check.Executables;
 using ETHTPS.Control.Commands.System.Check;
+using ETHTPS.Control.Configuration;
 using Spectre.Console;
 using Spectre.Console.Cli;
 
@@ -11,11 +11,17 @@ namespace ETHTPS.Control.Commands.System.Check
 	{
 		public override int Execute([NotNull] CommandContext context, [NotNull] SysCheckSettings settings)
 		{
+			var validationResult = settings.Validate();
+			if (!validationResult.Successful)
+			{
+				AnsiConsole.MarkupLine($"[red]{validationResult.Message}[/]");
+				return 1;
+			}
 			var config = AppConfig.FromJSON();
 			if (config.Dependencies == null)
 			{
-				AnsiConsole.MarkupLine("[red]No config.Dependencies found in configuration file.[/]");
-				return 1;
+				AnsiConsole.MarkupLine("[red]No dependencies found in configuration file.[/]");
+				return 0;
 			}
 			if (settings.Prompt)
 			{
@@ -31,7 +37,24 @@ namespace ETHTPS.Control.Commands.System.Check
 
 				config.Dependencies = config.Dependencies?.Where(d => manualSelection.Contains(d.Name)).ToArray();
 			}
-			config.RunDependencyCheck();
+			var externalDepCheck = config.RunExternalDependencyCheck();
+			if (!externalDepCheck)
+			{
+				AnsiConsole.MarkupLine("[red]External dependency check failed.[/] Please install the missing dependencies and try again.");
+			}
+			else
+			{
+				AnsiConsole.MarkupLine("[green]External dependency check passed.[/]");
+			}
+			var projectDepCheck = config.RunProjectDependencyCheck(settings.ETHTPSBaseDirectory);
+			if (!projectDepCheck)
+			{
+				AnsiConsole.MarkupLine("[red]Project dependency check failed.[/] Please clone the missing projects and try running the check again.");
+			}
+			else
+			{
+				AnsiConsole.MarkupLine("[green]Project dependency check passed.[/]");
+			}
 			return 0;
 		}
 	}

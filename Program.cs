@@ -15,8 +15,8 @@ namespace ETHTPS.Control
 			{
 				config.AddCommand<SysCheckCommand>("syscheck")
 							.WithAlias("sc")
-							.WithDescription("Checks the current system configuration")
-							.WithExample(new[] { "syscheck" });
+							.WithDescription("Checks whether the current system is configured properly in order to run ETHTPS locally.")
+							.WithExample(new[] { "syscheck --base-dir=/path/to/ethtps syscheck [--prompt | -p]" });
 			});
 			return app.Run(args);
 		}

@@ -31,5 +31,33 @@
 			"Description":"Visual Studio Code",
       "Mandatory":false
     }
-  ]
+  ],
+	"ProjectDependencies":[
+		{
+			"Name":"ethtps.backend",
+			"RepositoryURL":"https://github.com/ethtps/ethtps.backend",
+			"DefaultBranch":"dev"
+		},
+		{
+			"Name":"ethtps.frontend",
+			"RepositoryURL":"https://github.com/ethtps/ethtps.frontend",
+			"DefaultBranch":"dev"
+		},
+		{
+			"Name":"ethtps.utils",
+			"RepositoryURL":"https://github.com/ethtps/ethtps.utils"
+		},
+		{
+			"Name":"ethtps.admin.backend",
+			"RepositoryURL":"https://github.com/ethtps/ethtps.admin.backend"
+		},
+		{
+			"Name":"ethtps.api.clients",
+			"RepositoryURL":"https://github.com/ethtps/ethtps.api.clients"
+		}
+	],
+	"BranchAliases":{
+		"main":["master", "prod", "production"],
+		"dev":["develop", "development"]
+	}
 }
