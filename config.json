@@ -1,74 +1,87 @@
 {
-  "DefaultInstallationDirectories":["/usr/local/bin/", "/usr/bin/", "/bin/", "/usr/local/sbin/", "/usr/sbin/", "/sbin/", "C:/Program Files/", "C:/Program Files (x86)/", "C:/Windows/System32/", "C:/Windows/"],
-  "Dependencies":[
-    {
-      "Name":"git",
-      "Description": "git client",
-      "Mandatory":true
-    },
-    {
-      "Name":"docker",
-      "Mandatory":true
-    },
-    {
-      "Name":"docker-compose",
-      "Mandatory":true
-    },
-    {
-      "Name":"node",
-      "Mandatory":true
-    },
-    {
-      "Name":"yarn",
-      "Mandatory":false
-    },
+	"DefaultInstallationDirectories": [
+		"/usr/local/bin/",
+		"/usr/bin/",
+		"/bin/",
+		"/usr/local/sbin/",
+		"/usr/sbin/",
+		"/sbin/",
+		"C:/Program Files/",
+		"C:/Program Files (x86)/",
+		"C:/Windows/System32/",
+		"C:/Windows/"
+	],
+	"Dependencies": [
 		{
-      "Name":"azuredatastudio",
-      "Mandatory":false
-    },
-		{
-      "Name":"code",
-			"Description":"Visual Studio Code",
-      "Mandatory":false
-    }
-  ],
-	"ProjectDependencies":[
-		{
-			"Name":"ethtps.backend",
-			"Aliases":["backend", "api"],
-			"RepositoryURL":"https://github.com/ethtps/ethtps.backend",
-			"DefaultBranch":"dev"
+			"Name": "git",
+			"Description": "git client",
+			"Mandatory": true
 		},
 		{
-			"Name":"ethtps.frontend",
-			"Aliases":["frontend", "web"],
-			"RepositoryURL":"https://github.com/ethtps/ethtps.frontend",
-			"DefaultBranch":"dev",
+			"Name": "docker",
+			"Mandatory": true
 		},
 		{
-			"Name":"ethtps.utils",
-			"Aliases":["utils", "common"],
-			"RepositoryURL":"https://github.com/ethtps/ethtps.utils"
+			"Name": "docker-compose",
+			"Mandatory": true
 		},
 		{
-			"Name":"ethtps.admin.backend",
-			"Aliases":["admin", "admin-backend"],
-			"RepositoryURL":"https://github.com/ethtps/ethtps.admin.backend"
+			"Name": "node",
+			"Mandatory": true
 		},
 		{
-			"Name":"ethtps.api.clients",
-			"Aliases":["clients", "api-clients"],
-			"RepositoryURL":"https://github.com/ethtps/ethtps.api.clients"
+			"Name": "yarn",
+			"Mandatory": false
+		},
+		{
+			"Name": "azuredatastudio",
+			"Mandatory": false
+		},
+		{
+			"Name": "code",
+			"Description": "Visual Studio Code",
+			"Mandatory": false
 		}
 	],
-	"BranchAliases":{
-		"main":["master", "prod", "production"],
-		"dev":["develop", "development"]
+	"ProjectDependencies": [
+		{
+			"Name": "ethtps.backend",
+			"Aliases": ["backend", "api"],
+			"RepositoryURL": "https://github.com/ethtps/ethtps.backend",
+			"DefaultBranch": "dev"
+		},
+		{
+			"Name": "ethtps.frontend",
+			"Aliases": ["frontend", "web"],
+			"RepositoryURL": "https://github.com/ethtps/ethtps.frontend",
+			"DefaultBranch": "dev"
+		},
+		{
+			"Name": "ethtps.utils",
+			"Aliases": ["utils", "common"],
+			"RepositoryURL": "https://github.com/ethtps/ethtps.utils"
+		},
+		{
+			"Name": "ethtps.admin.backend",
+			"Aliases": ["admin", "admin-backend"],
+			"RepositoryURL": "https://github.com/ethtps/ethtps.admin.backend"
+		},
+		{
+			"Name": "ethtps.api.clients",
+			"Aliases": ["clients", "api-clients"],
+			"RepositoryURL": "https://github.com/ethtps/ethtps.api.clients"
+		}
+	],
+	"BranchAliases": {
+		"main": ["master", "prod", "production"],
+		"dev": ["develop", "development"]
 	},
-	"Editor":"code",
-	"System":{
-	"Endpoints":[
-		"https://ethtps.info",
-		"https://api.ethtps.info"
-	]}
+	"Editor": "code",
+	"System": {
+		"Endpoints": [
+			"https://ethtps.info",
+			"https://api.ethtps.info",
+			"wss://ethtps.info"
+		]
+	}
 }

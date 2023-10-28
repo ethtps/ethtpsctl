@@ -1,19 +1,17 @@
 using System;
 using System.ComponentModel;
+using ETHTPS.Control.Commands.System;
 using Spectre.Console;
 using Spectre.Console.Cli;
 
 namespace ETHTPS.Control.Commands
 {
-	public abstract class ETHTPSCommandSettingsBase : CommandSettings
+	public abstract class ETHTPSCommandSettingsBase : CommandSettings, IVerbose
 	{
 		[CommandOption("-b|--base-directory", IsHidden = false)]
 		[Description("The directory where ETHTPS code should reside")]
 		public required string ETHTPSBaseDirectory { get; set; }
 
-		[CommandOption("-v|--verbose", IsHidden = false)]
-		[Description("Show verbose output")]
-		[DefaultValue(false)]
 		public bool Verbose { get; set; }
 
 		public override ValidationResult Validate()
